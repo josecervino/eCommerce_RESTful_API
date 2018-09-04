@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server-postgresql/server.js",
     "test": ""
   },
   "author": "Joseph Cervino",
@@ -11,6 +11,7 @@
   "dependencies": {
     "cheerio": "^0.19.0",
     "express": "^4.16.3",
+    "jquery": "^3.3.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
@@ -26,6 +27,11 @@
     "chai": "^2.3.0",
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "path": "^0.12.7",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1",
     "supertest": "^1.2.0",
     "webpack": "^4.17.1",
     "webpack-dev-server": "^3.1.7"

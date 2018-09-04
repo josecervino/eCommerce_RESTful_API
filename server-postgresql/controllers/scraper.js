@@ -1,16 +1,17 @@
+'use strict';
+
 const cheerio = require('cheerio');
 const request = require('request');
+// const path = require('path');
 
 const scrapeController = {
-  getData: (res, next) => {
-    request('https://newyork.craigslist.org/search/zip?search_distance=1&postal=10012', (error, response, html) => {
-      // MAKE IT POSSIBLE TO CHANGE THE POSTAL CODE && SEARCH DISTANCE
-      // PATH.RESOLVE(URL + DISTANCE + URL + ZIP CODE);
+  getData: (req, res, next) => {
+    request('https://newyork.craigslist.org/search/zip?search_distance=2&postal=10012', (error, response, html) => {
+    // DYNAMIC VERSION -> request(path.resolve('https://newyork.craigslist.org/search/zip?search_distance=' + req.body.zip + '&postal=' + req.body.distance), (error, response, html) => {
 
       const $ = cheerio.load(html);
 
       const listItems = $('.result-row', '#sortable-results .rows', html);
-
       const listItemsArray = Object.entries(listItems);
       const itemsArray = [];
 
@@ -26,11 +27,12 @@ const scrapeController = {
             title: titleText,
             url: urlText,
             locationText: location,
-            dateText: date,
+            dateText: date, 
           });
         }
       }
       res.locals.data = itemsArray;
+      console.log('inside scraperController')
       next();
     });
   },
