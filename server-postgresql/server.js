@@ -4,11 +4,15 @@ const express = require('express');
 const app = express();
 const scraperController = require('./controllers/scraper');
 const eBayController = require('./controllers/eBay');
+const avgPriceController = require('./controllers/avgPrice');
+const avgTimeController = require('./controllers/avgTime');
 
 // first sample route
 app.get('/',
   scraperController.getData,
   eBayController.queryData,
+  avgPriceController.calculate,
+  avgTimeController.calculate,
   (req, res) => {
     res.status(200);
     res.setHeader(

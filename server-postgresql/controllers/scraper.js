@@ -2,7 +2,6 @@
 
 const cheerio = require('cheerio');
 const request = require('request');
-// const path = require('path');
 
 const scrapeController = {
   getData: (req, res, next) => {
@@ -27,12 +26,15 @@ const scrapeController = {
             title: titleText,
             url: urlText,
             locationText: location,
-            dateText: date, 
+            dateText: date,
+            avgPrice: null,
+            avgSaleTime: null,
+            eBay: null,
           });
         }
       }
       res.locals.data = itemsArray;
-      console.log('inside scraperController')
+      console.log('inside scraperController');
       next();
     });
   },
