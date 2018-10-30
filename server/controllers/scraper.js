@@ -4,12 +4,11 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 const scrapeController = {
+
   getData: (req, res, next) => {
     request('https://newyork.craigslist.org/search/zip?search_distance=2&postal=10012', (error, response, html) => {
-    // DYNAMIC VERSION -> request(path.resolve('https://newyork.craigslist.org/search/zip?search_distance=' + req.body.zip + '&postal=' + req.body.distance), (error, response, html) => {
 
       const $ = cheerio.load(html);
-
       const listItems = $('.result-row', '#sortable-results .rows', html);
       const listItemsArray = Object.entries(listItems);
       const itemsArray = [];
@@ -21,7 +20,7 @@ const scrapeController = {
           const urlText = $('.result-title', obj, html).attr('href');
           const location = $('.result-hood', obj, html).text();
           const date = $('.result-date', obj, html).attr('datetime');
-
+ 
           itemsArray.push({
             title: titleText,
             url: urlText,
@@ -33,8 +32,8 @@ const scrapeController = {
           });
         }
       }
+      
       res.locals.data = itemsArray;
-      console.log('inside scraperController');
       next();
     });
   },

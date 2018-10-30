@@ -6,7 +6,6 @@ const avgTimeController = {
   calculate: (req, res, next) => {
     console.log('inside avgTime Controller');
 
-      // MARKETPLACE INSIGHTS API -----------------------
       res.locals.data.forEach(function(el) {
       let eBayItems = res.locals.data[el].eBay.itemSales;
 
@@ -43,9 +42,7 @@ const avgTimeController = {
 
         res.locals.data[el].avgSaleTime = avgTime;
       });
-    // -------------------------------------------------
-
-    console.log('inside avgTime Controller');
+      
     next();
   }
 }

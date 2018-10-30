@@ -5,15 +5,12 @@ const Promise = require('promise');
 
 const eBayController = {
   queryData: (req, res, next) => {
-    console.log('inside eBayController');
 
     const urls = [];
-    for (let i =0; i < res.locals.data.length; i += 1) {
+    for (let i = 0; i < res.locals.data.length; i += 1) {
       const regex = /[a-z0-9]/gi;
       let resLocalIndex = res.locals.data[i].title;
       let item = resLocalIndex.match(regex).join('');
-      //encodeURIComponent(resLocalIndex.trim());
-      // console.log(item);
 
       const eBayURLAndHeader = {
         url: 'https://api.sandbox.ebay.com/buy/marketplace_insights/v1_beta/item_sales/search?q=' + item + '&limit=50',
@@ -24,53 +21,19 @@ const eBayController = {
           'Content-Type': 'application/json',
         }
       }
+
       urls.push(eBayURLAndHeader);
     }
 
-    let count = 0;
     for (let i = 0; i < urls.length; i += 1) {
-        request(urls[i], (error, response, body) => {
-          if (error) console.log('Error: ', error);
-  
-          const eBayData = JSON.parse(body);
-          res.locals.data[i].eBay = eBayData;
-          // console.log(res.locals.data[i])
-          count += 1;
-          console.log(count)
-          console.log(`-------------------------${i}-----------------------`);
+      request(urls[i], (error, response, body) => {
+        if (error) console.log('Error: ', error);
+
+        const eBayData = JSON.parse(body);
+        res.locals.data[i].eBay = eBayData;
         })
     };
 
-    // invoke these API requests, assign the return values to the eBay property
-
-    // let count = 0;
-    // let requests = [];
-    // for (let i = 0; i < urls.length; i += 1) {
-    //   const promiseIteration = new Promise(function(resolve, reject) {
-    //     request(urls[i], (error, response, body) => {
-    //       if (error) console.log('Error: ', error);
-  
-    //       const eBayData = JSON.parse(body);
-    //       res.locals.data[i].eBay = eBayData;
-    //       console.log(count);
-    //       // console.log(res.locals.data[i])
-    //       count += 1;
-    //       console.log(`-------------------------${i}-----------------------`);
-    //     })
-    //     console.log('Promise Iteration: ', promiseIteration)
-    //     requests.push(promiseIteration); //can't push async variable
-    //   })
-    // };
-
-    // //never reaching here
-   
-    // promise.all(requests) //requests array is empty
-    //   .catch((reason) => console.log(reason))
-    // console.log(res.locals.data);
-
-    // console.log('Promises completed!')
-
-    console.log(res.locals.data[0]);
     next();
   },
 }

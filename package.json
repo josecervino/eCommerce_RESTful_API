@@ -1,41 +1,25 @@
 {
-  "name": "craigslist-ebay-api",
-  "version": "1.0.0",
+  "name": "eCommerce-RESTful-API",
+  "version": "0.0.2",
   "main": "index.js",
   "scripts": {
-    "start": "node server-postgresql/server.js",
-    "test": ""
+    "start": "node server/server.js",
+    "test": "mocha tests/index.js",
+    "html": "open index.html"
   },
-  "author": "Joseph Cervino",
+  "author": "Joe Cervino",
   "license": "UNLICENSED",
   "dependencies": {
-    "cheerio": "^0.19.0",
-    "express": "^4.16.3",
+    "cheerio": "^0.22.0",
+    "express": "^4.16.4",
     "jquery": "^3.3.1",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.5",
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.2",
-    "babel-preset-react": "^6.24.1",
     "chai": "^2.3.0",
-    "css-loader": "^1.0.0",
-    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^5.2.0",
     "path": "^0.12.7",
-    "pg": "^7.4.3",
-    "pg-hstore": "^2.3.2",
-    "promise": "^8.0.1",
-    "sequelize": "^4.38.0",
-    "sequelize-cli": "^4.1.1",
-    "supertest": "^1.2.0",
-    "webpack": "^4.17.1",
-    "webpack-dev-server": "^3.1.7"
+    "supertest": "^3.3.0"
   },
-  "description": "Attempt at building an API, potentially transforming into a full-fledged project using react & redux."
+  "description": "API that automatically scrapes Craigslist free section and queries eBay API using the scraped items. Returns a JSON object containing objects containing Craigslist item data as properties with associated eBay items average price and average sale time calculations as properties."
 }
