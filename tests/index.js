@@ -1,16 +1,16 @@
 // test file
 
-const request = require('supertest');
-const app = require('../server/server');
+const request = require("supertest");
+const app = require("../server/server");
 
-describe('API General Request', () => {
-  it ('responds with JSON object containing Craigslist item info & associated eBay API data', () => {
+describe("API General Request", () => {
+  it("responds with JSON object containing Craigslist item info & associated eBay API data", () => {
     request()
-      .get('/')
-      .expect('Content-Type', /json/)
-      .expect(200, done)
-  })
-})
+      .get("/")
+      .expect("Content-Type", /json/)
+      .expect(200, done);
+  });
+});
 
 /*
 1. After scraperController.getData, res.locals.data is an array of objects with title, url, locationText, dateText, avgPrice, avgSaleTime, and eBay properties
